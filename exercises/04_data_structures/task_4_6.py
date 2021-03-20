@@ -23,7 +23,7 @@ ospf_route = ospf_route.replace(",","")
 
 ospf_route_list = ospf_route.split()
 ospf_route_list[1] = str(ospf_route_list[1]).strip("[]")
-print(ospf_route_list)
+#print(ospf_route_list)
 
 template = '''
 Prefix                {0}

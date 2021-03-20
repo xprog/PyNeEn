@@ -30,7 +30,7 @@ ip = "192.168.3.1"
 ip_list = ip.split(".")
 
 template_dec = "{:<10}{:<10}{:<10}{:<10}"
-template_hex = "{0:<08b}  {1:<008b}  {2:<08b}  {3:<08b}"
+template_hex = "{0:>08b}  {1:>008b}  {2:>08b}  {3:>08b}"
 
 print( template_dec.format((ip_list[0]), (ip_list[1]), (ip_list[2]), ip_list[3]) )
 print( template_hex.format(int(ip_list[0]), int(ip_list[1]), int(ip_list[2]), int(ip_list[3])) )

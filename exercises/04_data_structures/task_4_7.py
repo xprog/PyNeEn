@@ -21,6 +21,6 @@ template = "{0:0b}{1:0b}{2:0b}"
 
 mac_list = mac.split(":")
 
-print(mac_list)
+#print(mac_list)
 
 print(template.format(int(mac_list[0],16), int(mac_list[1],16), int(mac_list[2], 16)))
