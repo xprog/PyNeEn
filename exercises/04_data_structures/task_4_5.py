@@ -28,22 +28,17 @@ vlan2 = command2.split()[-1].split(",")
 vlan3 = vlan1.copy()
 vlan3.extend(vlan2)
 
+result = list(set(vlan1) & set(vlan2))
+result.sort()
+
 #print(vlan1)
 #print(vlan2)
 
-result = []
+# 2 вариант
+#result = []
 
-for v in vlan1:
-    if v in vlan2: result.append(v)
-
-
-# без цикла
-#if vlan1[0] in vlan2: result.append(vlan1[0])
-#if vlan1[1] in vlan2: result.append(vlan1[1])
-#if vlan1[2] in vlan2: result.append(vlan1[2])
-#if vlan1[3] in vlan2: result.append(vlan1[3])
-#if vlan1[4] in vlan2: result.append(vlan1[4])
-
+#for v in vlan1:
+#    if v in vlan2: result.append(v)
 
 print(result)
 
