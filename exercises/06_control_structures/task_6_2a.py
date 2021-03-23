@@ -17,3 +17,65 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+ip = input("Введите IP-адреса в формате 10.0.1.1: ")
+
+#ip = "10.0.1.1"
+#ip = "255.255.255.255"
+#ip = "0.0.0.0"
+'''
+            ("10.1.1.1", "unicast"),
+            ("230.1.1.1", "multicast"),
+            ("255.255.255.255", "local broadcast"),
+            ("0.0.0.0", "unassigned"),
+            ("250.1.1.1", "unused"),
+            
+            ("10.1.1", "неправильный"),
+            ("10.a.2.a", "неправильный"),
+            ("10.1.1.1.1", "неправильный"),
+            ("10.1.1.", "неправильный"),
+            ("300.1.1.1", "неправильный"),
+            ("30,1.1.1.1", "неправильный"),
+            
+'''
+'''
+ip = "10.1.1.1"
+ip = "230.1.1.1"
+ip = "255.255.255.255"
+ip = "0.0.0.0"
+ip = "250.1.1.1"
+ip = "300.1.1.1"
+'''
+
+ips = ip.split(".")
+
+text = ""
+
+
+if ip.count(".") != 3:
+    text = "Неправильный IP-адрес"
+elif ips[0].isdigit() == False or ips[1].isdigit() == False or \
+ips[2].isdigit() == False or ips[3].isdigit() == False:
+    text = "Неправильный IP-адрес"
+else:
+    for i in ips:
+        if int(i) <0 or int(i) > 255:
+            text = "Неправильный IP-адрес"
+
+
+#print(ips)
+
+if text != "Неправильный IP-адрес":
+
+    if int(ips[0]) >= 1 and int(ips[0]) <= 223:
+        text = "unicast"
+    elif int(ips[0]) >= 224 and int(ips[0]) <= 239:
+        text = "multicast"
+    elif ip == "255.255.255.255":
+        text = "local broadcast"
+    elif ip == "0.0.0.0":
+        text = "unassigned"
+    else:
+        text = "unused"
+
+print(text)
+
