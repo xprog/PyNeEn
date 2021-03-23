@@ -46,3 +46,7 @@ london_co = {
         "routing": True,
     },
 }
+
+i = input('input устройство:  ')
+
+print(london_co[i])

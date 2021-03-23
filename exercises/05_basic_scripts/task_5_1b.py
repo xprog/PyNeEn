@@ -50,3 +50,10 @@ london_co = {
         "routing": True,
     },
 }
+
+device = input('Введите имя устройства:  ')
+template = "Введите имя параметра {}: "
+
+param = input(template.format(tuple(london_co[device].keys())))
+
+print(london_co[device][param])

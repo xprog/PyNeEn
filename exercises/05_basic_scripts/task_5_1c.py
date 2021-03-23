@@ -49,3 +49,16 @@ london_co = {
         "routing": True,
     },
 }
+
+
+device = input('Введите имя устройства:  ')
+template = "Введите имя параметра {}: "
+
+param = input(template.format(tuple(london_co[device].keys())))
+
+
+p = param in tuple(london_co[device].keys())
+if p == False:
+    print("Такого параметра нет")
+else:
+    print(london_co[device][param])
