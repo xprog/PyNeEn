@@ -17,3 +17,20 @@
 """
 
 ignore = ["duplex", "alias", "configuration"]
+
+import sys
+
+arg = sys.argv[1]
+
+
+
+with open(arg) as f:
+    for line in f:   
+        line = line.rstrip()
+        if not line.startswith("!"):
+            is_ignore = False
+            for ign in ignore:
+                if line.find(ign) != -1:
+                    is_ignore = True
+            if is_ignore == False:
+                print(line)

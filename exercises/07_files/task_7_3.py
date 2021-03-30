@@ -20,3 +20,12 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+with open("CAM_table.txt") as file_src:
+    for str_conf in file_src:
+#        print(str_conf)
+        if "DYNAMIC" in str_conf:
+            vlan, mac, _, port = str_conf.split()
+            print("{:<9}{:<20}{}".format(vlan, mac, port))
+
+    
