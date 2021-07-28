@@ -25,21 +25,9 @@ command2 = "switchport trunk allowed vlan 1,3,8,9"
 
 vlan1 = command1.split()[-1].split(",")
 vlan2 = command2.split()[-1].split(",")
-vlan3 = vlan1.copy()
-vlan3.extend(vlan2)
 
-result = list(set(vlan1) & set(vlan2))
-result.sort()
+vlan = list(set(vlan1) & set(vlan2))
 
-#print(vlan1)
-#print(vlan2)
-
-# 2 вариант
-#result = []
-
-#for v in vlan1:
-#    if v in vlan2: result.append(v)
-
-print(result)
+print(vlan)
 
 
