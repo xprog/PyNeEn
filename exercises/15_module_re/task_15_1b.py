@@ -11,7 +11,7 @@ interface Ethernet0/1
  ip address 10.254.2.2 255.255.255.0 secondary
 
 А в словаре, который возвращает функция get_ip_from_cfg, интерфейсу Ethernet0/1
-соответствует только один из них (второй).
+соответствует только один из них.
 
 Скопировать функцию get_ip_from_cfg из задания 15.1a и переделать ее таким
 образом, чтобы в значении словаря она возвращала список кортежей
@@ -28,32 +28,3 @@ IP-адреса, диапазоны адресов и так далее, так 
 а не ввод пользователя.
 
 """
-import re
-from pprint import pprint
-from sys import argv
-
-
-def get_ip_from_cfg(config_filename):
-    new_list = {}
-    regex = (
-        r"interface (?P<intf>\S+)\n"
-        r"( .*\n)*?"
-        r" ip +\w+ (?P<ip>\S+) (?P<mask>\S+)\n"
-        r"( ip +\w+ (?P<ip2>\S+) (?P<mask2>\S+) secondary)?"
-    )
-    with open(config_filename) as f:
-        all_match = re.finditer(regex, f.read())
-        for line in all_match:
-            intf = line.group('intf')
-            ip, mask = line.group('ip', 'mask')
-            ip2, mask2 = line.group('ip2', 'mask2')
-            if ip2 == None:
-                new_list[intf] = [(ip, mask)]
-            else:
-                new_list[intf] = [(ip, mask),(ip2, mask2)]
-    return new_list
-
-
-if __name__ == "__main__":
-    pprint(get_ip_from_cfg("config_r2.txt"))
-

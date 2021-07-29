@@ -23,7 +23,3 @@
 а не ввод пользователя.
 
 """
-id, hostname, p_3g, p_3I_1, p_bi_5, p_aq_2, _, p_3j_1, p_3l_1, p_3gl_b4, p_3o_1, p_bi_1, p_j2_2_self, p_o2_2_self, p_l2_2_self, _, _, squp_id, _ , p_2b_tun_host, p_2h_1,  *trash, p, _al1, p_al2, p_al3 = list(range(40))
-
-all_vars = {key: value for key, value in globals().items() if not key.startswith("_")}
-print(all_vars)

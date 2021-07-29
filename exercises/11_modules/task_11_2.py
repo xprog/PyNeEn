@@ -34,22 +34,3 @@ infiles = [
     "sh_cdp_n_r2.txt",
     "sh_cdp_n_r3.txt",
 ]
-def create_network_map(filenames):
-    """
-    Создать функцию create_network_map, которая обрабатывает вывод команды
-    show cdp neighbors из нескольких файлов
-    и объединяет его в одну общую топологию..
-    """
-    result = {}
-    for filename in filenames:
-        with open(filename) as f:
-            command_output = f.read().split('\n')
-            for line in command_output:
-                if 'show cdp neighbors' in line:
-                    local_dev = line.split('>')[0]
-                elif line and "Eth" in line:
-                    line_list = line.split()
-                    remote_dev, l_intf_type, l_intf_num, *rest, r_intf_type, r_intf_num = line_list
-                    local = (local_dev, l_intf_type + l_intf_num)
-                    result[local] = (remote_dev, r_intf_type + r_intf_num)
-    return result

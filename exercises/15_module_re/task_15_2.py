@@ -21,12 +21,3 @@
 Проверить работу функции на примере файла sh_ip_int_br.txt.
 
 """
-import re
-
-def parse_sh_ip_int_br(filename):
-    regex = r"([FL]\S+) +(\S+) +\S+ \S+ +(up|administratively down|down) +(\S+)"
-    #result = []
-    with open(filename) as f:
-        result = [m.groups() for m in re.finditer(regex, f.read())]
-    return result
-
