@@ -47,6 +47,6 @@ london_co = {
     },
 }
 
-i = input('input устройство:  ')
+device = input('Введите имя устройства:  ')
 
-print(london_co[i])
+print(london_co[device])

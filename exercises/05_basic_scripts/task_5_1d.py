@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
+'''
 Задание 5.1d
 
 Переделать скрипт из задания 5.1c таким образом, чтобы, при запросе параметра,
@@ -14,45 +14,39 @@ $ python task_5_1d.py
 
 Ограничение: нельзя изменять словарь london_co.
 
-Все задания надо выполнять используя только пройденные темы. То есть эту задачу можно
-решить без использования условия if.
-"""
+Все задания надо выполнять используя только пройденные темы.
+То есть эту задачу можно решить без использования условия if.
+'''
 
 london_co = {
-    "r1": {
-        "location": "21 New Globe Walk",
-        "vendor": "Cisco",
-        "model": "4451",
-        "ios": "15.4",
-        "ip": "10.255.0.1",
+    'r1': {
+        'location': '21 New Globe Walk',
+        'vendor': 'Cisco',
+        'model': '4451',
+        'ios': '15.4',
+        'ip': '10.255.0.1'
     },
-    "r2": {
-        "location": "21 New Globe Walk",
-        "vendor": "Cisco",
-        "model": "4451",
-        "ios": "15.4",
-        "ip": "10.255.0.2",
+    'r2': {
+        'location': '21 New Globe Walk',
+        'vendor': 'Cisco',
+        'model': '4451',
+        'ios': '15.4',
+        'ip': '10.255.0.2'
     },
-    "sw1": {
-        "location": "21 New Globe Walk",
-        "vendor": "Cisco",
-        "model": "3850",
-        "ios": "3.6.XE",
-        "ip": "10.255.0.101",
-        "vlans": "10,20,30",
-        "routing": True,
-    },
+    'sw1': {
+        'location': '21 New Globe Walk',
+        'vendor': 'Cisco',
+        'model': '3850',
+        'ios': '3.6.XE',
+        'ip': '10.255.0.101',
+        'vlans': '10,20,30',
+        'routing': True
+    }
 }
-
 
 device = input('Введите имя устройства:  ')
 template = "Введите имя параметра {}: "
 
-param = (input(template.format(tuple(london_co[device].keys())))).lower()
+param = input(template.format(tuple(london_co[device].keys())))
 
-
-p = param in tuple(london_co[device].keys())
-if p == False:
-    print("Такого параметра нет")
-else:
-    print(london_co[device][param])
+print(london_co[device].get(param.lower(), "Такого параметра нет"))
