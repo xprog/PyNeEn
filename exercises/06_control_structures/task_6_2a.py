@@ -17,65 +17,49 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
-ip = input("Введите IP-адреса в формате 10.0.1.1: ")
 
-#ip = "10.0.1.1"
-#ip = "255.255.255.255"
-#ip = "0.0.0.0"
-'''
-            ("10.1.1.1", "unicast"),
-            ("230.1.1.1", "multicast"),
-            ("255.255.255.255", "local broadcast"),
-            ("0.0.0.0", "unassigned"),
-            ("250.1.1.1", "unused"),
-            
-            ("10.1.1", "неправильный"),
-            ("10.a.2.a", "неправильный"),
-            ("10.1.1.1.1", "неправильный"),
-            ("10.1.1.", "неправильный"),
-            ("300.1.1.1", "неправильный"),
-            ("30,1.1.1.1", "неправильный"),
-            
-'''
-'''
-ip = "10.1.1.1"
-ip = "230.1.1.1"
-ip = "255.255.255.255"
-ip = "0.0.0.0"
-ip = "250.1.1.1"
-ip = "300.1.1.1"
-'''
+ip = input("Введите IP-адрес в формате 10.0.1.1: \n")
+# ip = "300.1.1.1"
 
-ips = ip.split(".")
+ip_correct = True
 
-text = ""
+# ip_octet = int(ip.split(".")[0])
+ip_octets = ip.split(".")
 
+# состоит из 4 cимволов,разделенных "."
+if len(ip_octets) != 4:
+    ip_correct = False
 
-if ip.count(".") != 3:
-    text = "Неправильный IP-адрес"
-elif ips[0].isdigit() == False or ips[1].isdigit() == False or \
-ips[2].isdigit() == False or ips[3].isdigit() == False:
-    text = "Неправильный IP-адрес"
-else:
-    for i in ips:
-        if int(i) <0 or int(i) > 255:
-            text = "Неправильный IP-адрес"
+for oct_str in ip_octets:
 
+    if ip_correct == False:
+        break
 
-#print(ips)
+    if not oct_str.isdigit():
+        ip_correct = False
+        break
+    elif int(oct_str) < 0 or int(oct_str) > 255:
+        ip_correct = False
+        break
 
-if text != "Неправильный IP-адрес":
+if ip_correct != False:
 
-    if int(ips[0]) >= 1 and int(ips[0]) <= 223:
-        text = "unicast"
-    elif int(ips[0]) >= 224 and int(ips[0]) <= 239:
-        text = "multicast"
-    elif ip == "255.255.255.255":
-        text = "local broadcast"
-    elif ip == "0.0.0.0":
-        text = "unassigned"
+    if ip_octets[0].isdigit():
+        ip_octet = int(ip_octets[0])
     else:
-        text = "unused"
+        ip_correct = False
+
+if ip_correct == False:
+    text = 'Неправильный IP-адрес'
+elif ip == "0.0.0.0":
+    text = 'unassigned'
+elif ip_octet >= 0 and ip_octet <= 223:
+    text = 'unicast'
+elif ip_octet >= 224 and ip_octet <= 239:
+    text = 'multicast'
+elif ip  == "255.255.255.255":
+    text = 'local broadcast'
+else:
+    text = 'unused'
 
 print(text)
-
