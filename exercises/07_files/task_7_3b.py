@@ -18,30 +18,31 @@ Enter VLAN number: 10
 
 """
 
-vlans = {}
+ignore = ["ddress", "---"]
+config_result = []
 
-with open("CAM_table.txt") as file_src:
-    for str_conf in file_src:
-#        print(str_conf)
-        if "DYNAMIC" in str_conf:
-            vlan, mac, _, port = str_conf.split()
-            current_str = "{:<9}{:<20}{}".format(vlan, mac, port)
-            #print(current_str)
+vlan = int(input("вводи номера VLAN:  "))
 
-            # храним данные в таком формате:
-            #[vlan1: (sett1, sett2, ..), vlan2: (sett1, sett2, ..), ..]
-            
-            if int(vlan) not in vlans.keys():
-                vlans[int(vlan)] = []
-               
-            vlans[int(vlan)].append(current_str)
+filename = "CAM_table.txt"
+with open(filename) as file:
+    for f in file:
+        if not f.startswith("!"):
+            is_ignore = False
+            for ign in ignore:
+                if ign in f:
+                    is_ignore = True
 
-vlans_sorted = sorted(vlans)
+            if not is_ignore and f.strip():
+                current = []
+                config = f.strip().split()
 
-vlan_number = int(input("введите номер VLANа;"))
+                current = [int(config[0]), config[1], config[3]]
 
+                # запоминать информацию только по указанному VLAN
+                if current[0] == vlan:
+                    config_result.append(current)
 
-for vl in vlans_sorted:
-    if vl == vlan_number:
-        for vl in vlans[vl]:
-            print(vl)
+config_result.sort()
+
+for cr in config_result:
+    print("{:<9}{:<20}{:}".format(cr[0], cr[1], cr[2]))

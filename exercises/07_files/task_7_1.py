@@ -15,19 +15,15 @@ Outbound Interface    FastEthernet0/0
 
 """
 
-with open("ospf.txt") as f:
-    for line in f:   
-        st = line.replace(",", "").split()
-#        print(st)
+template = '''Prefix                {}
+AD/Metric             {}
+Next-Hop              {}
+Last update           {}
+Outbound Interface    {}'''
 
-#        for s in st:
-#            print(s)
-#        print("-"*50)
+with open("ospf.txt") as file:
+    for f in file:
+        data = f.rstrip().split()
+        ad = data[2].strip("[]")
 
-        template = "{:<22}{}\n{:<22}{}\n{:<22}{}\n{:<22}{}\n{:<22}{}"
-
-        print(template.format("Prefix", st[1], "AD/Metric", st[2][1:-1], \
-        "Next-Hop", st[4], "Last update", st[5], "Outbound Interface", st[6]))
-#        print("-"*50)
-    
-
+        print(template.format(data[1], ad, data[4], data[5], data[6]))

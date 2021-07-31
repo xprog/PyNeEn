@@ -21,11 +21,17 @@
 
 """
 
-with open("CAM_table.txt") as file_src:
-    for str_conf in file_src:
-#        print(str_conf)
-        if "DYNAMIC" in str_conf:
-            vlan, mac, _, port = str_conf.split()
-            print("{:<9}{:<20}{}".format(vlan, mac, port))
+ignore = ["ddress", "---"]
 
-    
+filename = "CAM_table.txt"
+with open(filename) as file:
+    for f in file:
+        if not f.startswith("!"):
+            is_ignore = False
+            for ign in ignore:
+                if ign in f:
+                    is_ignore = True
+
+            if not is_ignore and f.strip():
+                config = f.strip().split()
+                print("{:<9}{:<20}{:}".format(config[0], config[1], config[3]))

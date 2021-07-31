@@ -18,19 +18,17 @@
 
 ignore = ["duplex", "alias", "configuration"]
 
-import sys
+from sys import argv
 
-arg = sys.argv[1]
-
-
-
-with open(arg) as f:
-    for line in f:   
-        line = line.rstrip()
-        if not line.startswith("!"):
+# filename = "config_sw1.txt"
+# with open(filename) as file:
+with open(argv[1]) as file:
+    for f in file:
+        if not f.startswith("!"):
             is_ignore = False
             for ign in ignore:
-                if line.find(ign) != -1:
+                if ign in f:
                     is_ignore = True
-            if is_ignore == False:
-                print(line)
+
+            if not is_ignore:
+                print(f.rstrip())
