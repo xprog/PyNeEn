@@ -22,4 +22,26 @@
 Проверить работу функции на примере файла config_sw1.txt
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
+
 """
+
+def get_int_vlan_map(config_filename):
+    with open(config_filename) as file:
+        port_trunk = {}
+        port_access = {}
+
+        for line in file:
+            if line.count("interface"):
+                _, intf = line.split()
+            elif line.count("vlan"):
+                _, mode, *other, vlan = line.split()
+                if mode == "access":
+                    port_access[intf] = vlan
+                elif mode == "trunk":
+                    port_trunk[intf] = vlan
+
+    return (port_access, port_trunk)
+
+result = get_int_vlan_map("config_sw1.txt")
+
+print(result)
