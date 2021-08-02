@@ -93,3 +93,25 @@ london_co = {
 'IP': '10.255.0.101'
 }
 }
+
+def convert_config_to_dict(filename):
+    result = {}
+    with open(filename) as file:
+        key, key_last = None, None
+        command = []
+        for line in file:
+            if not line.startswith("!") and line.strip() and not ignore_command(line, ignore):
+                if not line.strip("\n").startswith(" "):
+                    key_last = key
+                    key = line.strip()
+                    if key_last:
+                        result[key_last] = command
+                        command = []
+                        # print(key_last, result[key_last])
+                else:
+                    command.append(line.strip())
+    return result
+
+result = convert_config_to_dict("config_sw1.txt")
+
+# print(result)
