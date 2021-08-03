@@ -48,14 +48,14 @@ trunk_config = {
     "FastEthernet0/4": [17],
 }
 
-def generate_access_config(intf_vlan_mapping, access_template):
+def generate_trunk_config(intf_vlan_mapping, trunk_template):
 
     result = {}
     for intf, vlans in intf_vlan_mapping.items():
         result[intf] = None
         # result.append(f"interface {intf}")
         commands = []
-        for command in access_template:
+        for command in trunk_template:
             if command.endswith("vlan"):
 
                 vlan = ""
@@ -71,7 +71,7 @@ def generate_access_config(intf_vlan_mapping, access_template):
         result[intf] = commands
     return result
 
-result = generate_access_config(trunk_config, trunk_mode_template)
+result = generate_trunk_config(trunk_config, trunk_mode_template)
 
 # for key, value in result.items():
 #     print(key, value)

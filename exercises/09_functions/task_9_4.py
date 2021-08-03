@@ -94,9 +94,9 @@ london_co = {
 }
 }
 
-def convert_config_to_dict(filename):
+def convert_config_to_dict(config_filename):
     result = {}
-    with open(filename) as file:
+    with open(config_filename) as file:
         key, key_last = None, None
         command = []
         for line in file:
@@ -110,8 +110,12 @@ def convert_config_to_dict(filename):
                         # print(key_last, result[key_last])
                 else:
                     command.append(line.strip())
+
+    result[key] = command
+    # print(key, result[key])
+
     return result
 
 result = convert_config_to_dict("config_sw1.txt")
 
-# print(result)
+print(result)

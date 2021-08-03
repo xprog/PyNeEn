@@ -36,9 +36,10 @@ def get_int_vlan_map(config_filename):
             elif line.count("vlan"):
                 _, mode, *other, vlan = line.split()
                 if mode == "access":
-                    port_access[intf] = vlan
+                    port_access[intf] = int(vlan)
                 elif mode == "trunk":
-                    port_trunk[intf] = vlan
+                    vlans = (vlan.split(","))
+                    port_trunk[intf] = [int(vlan) for vlan in vlans]
 
     return (port_access, port_trunk)
 
