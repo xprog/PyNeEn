@@ -44,6 +44,29 @@ def parse_cdp_neighbors(command_output):
     Плюс учимся работать с таким выводом.
     """
 
+    result = {}
+    is_title_done = False
+
+    lines = command_output.split("\n")
+    for line in lines:
+        if ">" in line:
+            hostname = line.split(">")[0]
+        # ищем заголовок, сос следующей строки идут данные
+        elif "Device ID" in line:
+            is_title_done = True
+            continue
+
+        if is_title_done and line:
+            data = line.strip().split()
+            # print(data)
+
+            # data:
+            # R1           Eth 0/1         122           R S I           2811       Eth 0/0
+            local = (hostname, f"{data[1]}{data[2]}")
+            neighbor = (data[0], f"{data[-2]}{data[-1]}")
+            result[local] = neighbor
+    return result
+
 
 if __name__ == "__main__":
     with open("sh_cdp_n_sw1.txt") as f:
