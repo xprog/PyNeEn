@@ -74,9 +74,34 @@
 
 """
 
+from task_11_2 import create_network_map
+from draw_network_graph import draw_topology
+
 infiles = [
     "sh_cdp_n_sw1.txt",
     "sh_cdp_n_r1.txt",
     "sh_cdp_n_r2.txt",
     "sh_cdp_n_r3.txt",
 ]
+
+def unique_network_map(topology_dict):
+    result_unique = {}
+    double_list = []
+
+    for key, value in topology_dict.items():
+        # print(key, value)
+        # проверка, что данная связь есть
+        if value in topology_dict.keys():
+            # проверка, что связь встречаем 2-й раз
+            if value not in double_list and key not in double_list:
+                double_list.append(value)
+                result_unique[key] = value
+        else:
+            result_unique[key] = value
+
+    return result_unique
+
+result = create_network_map(infiles)
+result = unique_network_map(result)
+
+draw_topology(result, "img/topology_unic")
